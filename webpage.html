@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+<link rel="stylesheet" href="webpage.css"> 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title> Author Names </title>
+</head>
+<div id="rectangle" style=" width:1440px;
+height:983px;
+top: -411px;
+left: -741px;">
+<body>
+  <i class="arrow left" style="display: inline-block;
+  border: solid #000000;
+  border-width: 0 3px 3px 0;
+  padding: 3px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg); text-align: center;"></i> 
+  <h1 style="font-size: 14; color: black; font-family: Arial, Helvetica, sans-serif; text-align: center;">You have 10 team members </h1>
+  <div id='authors_list'></div>
+  <script>
+  // Fetch data via requests
+  fetch('/author_name')
+    .then(response => response.json())
+    .then(data => {
+    const authorList = data.map(
+      author => `<table> <tr>
+        <img src="lorelai-gilmore.jpg" alt="Placeholder Img" width="50" height="50"> </tr>
+        <tr>${author.name}: </tr> 
+        <th>${author.email}</th></table>`
+    ).join('');
+    document.getElementById('authors_list').innerHTML = `<ul>${authorList}</ul>`;
+  })
+    .catch(error => console.error('Error occurred:', error));
+  </script>
+</div>
+</body>
+</html>
